@@ -4,8 +4,23 @@
 import requests, json, time
 from pimux import scrip
 
-headers = {"Content-Type": "application/json", "Authorization":"Bearer tj8QNWt14L8EqphPSZDX"}
-url=f"http://3.101.37.83:8080/api/v1/tj8QNWt14L8EqphPSZDX/telemetry"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# SSH connection details
+HOST = os.getenv('TERMUX_HOST')
+PORT = 8022
+USERNAME = os.getenv('TERMUX_USER')
+PASSWORD = os.getenv('TERMUX_PASSWORD')
+
+# Thingsboard details
+THINGSBOARD_URL = os.getenv('THINGSBOARD_URL')
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+
+headers = {"Content-Type": "application/json", "Authorization":f"Bearer {ACCESS_TOKEN}"}
+url=f"http://{THINGSBOARD_URL}:8080/api/v1/{ACCESS_TOKEN}/telemetry"
 
 while (1):
         ts = time.time()
